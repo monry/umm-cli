@@ -4,15 +4,13 @@ const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 
-var argv        = require('minimist')(
+const argv = require('minimist')(
   process.argv.slice(2),
   {
     string : [
       'name'
     ],
-    boolean: [
-
-    ],
+    boolean: [],
     alias  : {
       n: 'name'
     },
@@ -22,7 +20,7 @@ var argv        = require('minimist')(
   }
 );
 
-var command_list = [
+const command_list = [
   'new',
 ];
 
