@@ -3,7 +3,7 @@ var fs       = require('fs');
 var path     = require('path');
 var Rx       = require('rx');
 
-var files = require('../../lib/files');
+var files = require('../lib/files');
 
 module.exports = function(argv) {
   // 第二引数が渡されている場合はソレをパッケージ名として扱う
