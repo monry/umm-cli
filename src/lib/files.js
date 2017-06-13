@@ -1,11 +1,11 @@
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
-  getCurrentDirectoryName: function() {
+  getCurrentDirectoryName: () => {
     return path.basename(process.cwd());
   },
-  isDirectoryExists: function(filePath) {
+  isDirectoryExists: (filePath) => {
     try {
       return fs.statSync(filePath).isDirectory();
     } catch (err) {
