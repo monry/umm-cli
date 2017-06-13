@@ -43,5 +43,5 @@ if (0 > command_list.indexOf(argv._[0])) {
 }
 
 // 該当するコマンドを実行
-require('./src/command/' + argv._[0])(argv);
-
+const command = new (require('./lib/command/' + argv._[0]))(argv);
+command.run();
