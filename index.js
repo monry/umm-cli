@@ -40,7 +40,7 @@ var command_list = [
 clear();
 console.log(
   chalk.yellow(
-    figlet.textSync('Welcome to upm !', { horizontalLayout: 'full' })
+    figlet.textSync('Welcome to umm !', { horizontalLayout: 'full' })
   )
 );
 
