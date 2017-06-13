@@ -1,17 +1,17 @@
 {
-  "name": "upm",
+  "name": "umm-cli",
   "version": "1.0.0",
-  "description": "Unity Package Manager",
-  "main": "index.js",
+  "description": "Unity Module Manager CLI",
   "bin": {
-    "upm": "./index.js"
+    "umm": "./index.js"
   },
+  "preferGlobal": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/monry/upm.git"
+    "url": "git@github.com:monry/umm-cli.git"
   },
   "keywords": [
     "Unity",
@@ -20,9 +20,9 @@
   "author": "Tetsuya Mori",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/monry/upm/issues"
+    "url": "https://github.com/monry/umm-cli/issues"
   },
-  "homepage": "https://github.com/monry/upm#readme",
+  "homepage": "https://github.com/monry/umm-cli#readme",
   "dependencies": {
     "chalk": "^1.1.3",
     "clear": "0.0.1",
@@ -32,7 +32,8 @@
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "preferences": "^0.2.1",
-    "simple-git": "^1.72.0",
+    "rx": "^4.1.0",
+    "simple-git": "^1.73.0",
     "touch": "^1.0.0"
   }
 }
