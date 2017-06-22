@@ -22,7 +22,11 @@ class Command {
   run() {
     this.prepare();
     this.execute();
-    this.questions.forEach(this.prompts.onNext);
+    this.questions.forEach(
+      (question, index) => {
+        this.prompts.onNext(question);
+      }
+    );
     this.prompts.onCompleted();
   }
 
