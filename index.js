@@ -1,30 +1,17 @@
 #!/usr/bin/env node
 
-var chalk       = require('chalk');
-var clear       = require('clear');
-// var CLI         = require('clui');
-var figlet      = require('figlet');
-// var inquirer    = require('inquirer');
-// var Preferences = require('preferences');
-// var Spinner     = CLI.Spinner;
-// var _           = require('lodash');
-// var touch       = require('touch');
-// var fs          = require('fs');
-// var path        = require('path');
+const chalk = require('chalk');
+const clear = require('clear');
+const figlet = require('figlet');
 
-// var files       = require('./lib/files');
-
-// var git         = require('simple-git')();
-var argv        = require('minimist')(
+const argv = require('minimist')(
   process.argv.slice(2),
   {
-    string: [
+    string : [
       'name'
     ],
-    boolean: [
-
-    ],
-    alias: {
+    boolean: [],
+    alias  : {
       n: 'name'
     },
     default: {
@@ -33,7 +20,7 @@ var argv        = require('minimist')(
   }
 );
 
-var command_list = [
+const command_list = [
   'new',
 ];
 
@@ -56,5 +43,5 @@ if (0 > command_list.indexOf(argv._[0])) {
 }
 
 // 該当するコマンドを実行
-require('./src/command/' + argv._[0])(argv);
-
+const command = new (require('./lib/command/' + argv._[0]))(argv);
+command.run();
