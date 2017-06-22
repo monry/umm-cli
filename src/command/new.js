@@ -6,6 +6,10 @@ import * as rx from 'rx';
 import * as files from '../lib/files';
 
 class Command {
+  questions;
+  prompts;
+  streamInquirer;
+  argv;
 
   constructor(argv) {
     // 第二引数が渡されている場合はソレをパッケージ名として扱う
