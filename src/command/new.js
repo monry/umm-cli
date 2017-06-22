@@ -6,6 +6,10 @@ import * as rx from 'rx';
 import * as files from '../lib/files';
 
 class Command {
+  questions;
+  prompts;
+  streamInquirer;
+  argv;
 
   constructor(argv) {
     // 第二引数が渡されている場合はソレをパッケージ名として扱う
@@ -15,31 +19,25 @@ class Command {
     }
     this.argv = argv;
     this.prompts = new rx.Subject();
-    this.subjectInquirer = inquirer.prompt(this.prompts).ui.process;
+    this.streamInquirer = inquirer.prompt(this.prompts).ui.process;
+    this.questions = [];
   }
 
   run() {
     this.prepare();
     this.execute();
+    this.questions.forEach(
+      (question, index) => {
+        this.prompts.onNext(question);
+      }
+    );
+    this.prompts.onCompleted();
   }
 
   prepare() {
-    // 「nested な umm だけど良いの？」に対して No を回答した場合はプロセスを終了させる
-    this.subjectInquirer
-      .where(x => x.name === 'nestedUMM' && !x.answer)
-      .subscribe(_ => process.exit());
-    this.subjectInquirer
-      .subscribe(
-        _ => {},
-        e => {},
-        () => console.log('Completed!')
-      );
-  }
-
-  execute() {
     if (fs.existsSync(path.join(process.cwd(), 'package.json'))) {
       // カレントディレクトリ内に package.json がある場合、 umm がネストする疑いがあるので、本当に実行して良いか聞く
-      this.prompts.onNext(
+      this.questions.push(
         {
           type: 'confirm',
           name: 'nestedUMM',
@@ -49,7 +47,7 @@ class Command {
       );
     }
     // モジュール名の確認
-    this.prompts.onNext(
+    this.questions.push(
       {
         type: 'input',
         name: 'module_name',
@@ -69,7 +67,19 @@ class Command {
         },
       }
     );
-    this.prompts.onCompleted();
+  }
+
+  execute() {
+    // 「nested な umm だけど良いの？」に対して No を回答した場合はプロセスを終了させる
+    this.streamInquirer
+      .where(x => x.name === 'nestedUMM' && !x.answer)
+      .subscribe(_ => process.exit());
+    this.streamInquirer
+      .subscribe(
+        _ => {},
+        e => {},
+        () => console.log('Completed!')
+      );
   }
 
 }
